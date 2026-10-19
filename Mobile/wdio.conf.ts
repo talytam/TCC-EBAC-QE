@@ -24,7 +24,14 @@ export const config: WebdriverIO.Config = {
     connectionRetryCount: 1,
     services: [],
     framework: 'mocha',
-    reporters: ['spec'],
+reporters: [
+    'spec',
+    ['allure', {
+        outputDir: 'allure-results',
+        disableWebdriverStepsReporting: true,
+        disableWebdriverScreenshotsReporting: false
+    }]
+],
     mochaOpts: {
         ui: 'bdd',
         timeout: 60000
