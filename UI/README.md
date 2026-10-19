@@ -103,6 +103,14 @@ npx playwright show-report
 
 ## Evidências e cuidados
 
+### Evidência UI-001 — Execução automatizada do catálogo
+
+A execução consolidada da **US-0004** registrou **5 testes aprovados, nenhuma falha e tempo total de 15,9 segundos**, utilizando Chromium.
+
+![Relatório Playwright — CT-021 a CT-025 aprovados](../Evidencias/UI/US-0004/evidencia-ui-001-playwright.png)
+
+[Visualizar a imagem original no repositório](../Evidencias/UI/US-0004/evidencia-ui-001-playwright.png)
+
 A configuração registra **screenshots e traces em caso de falha**. Relatórios e resultados temporários são ignorados pelo Git por meio do `.gitignore`.
 
 Os testes são executados contra a loja de demonstração da EBAC. Mudanças nos produtos, seletores ou disponibilidade do ambiente podem exigir revisão dos cenários.
