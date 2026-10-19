@@ -5,6 +5,7 @@ Automação de testes funcionais do aplicativo Android **EBAC Store**, como part
 ## Tecnologias
 
 - **WebdriverIO**, **TypeScript** e **Mocha**
+- **Allure Reporter** e **Allure Commandline** para relatórios de execução
 - **Appium 2** e driver **UiAutomator2**
 - **Android Emulator** e **ADB**
 - Padrão **Page Object Model (POM)**
@@ -19,7 +20,7 @@ Automação de testes funcionais do aplicativo Android **EBAC Store**, como part
 | CT-024 | Retornar lista vazia e mensagem para produto inexistente | Aprovado |
 | CT-025 | Filtrar produtos por categoria | **Bloqueado** (`it.skip`) |
 
-**Última execução registrada:** 19/10/2026 — **4 passing, 1 skipped, 0 failing**; duração total de aproximadamente **2min20s**. O status `skipped` do WebdriverIO corresponde a um cenário **bloqueado**, não aprovado, na documentação de QA.
+**Última execução registrada:** 19/10/2026 — **4 passing, 1 skipped, 0 failing**; última execução com Allure em aproximadamente **2min57s**. O status `skipped` do WebdriverIO corresponde a um cenário **bloqueado**, não aprovado, na documentação de QA.
 
 ## Estrutura
 
@@ -33,7 +34,11 @@ Mobile/
 │       └── catalogo.spec.ts
 ├── wdio.conf.ts
 ├── package.json
+├── package-lock.json
+├── tsconfig.json
 └── evidencias/
+    ├── execucao-catalogo-android.png
+    └── relatorio-allure-android.png
 ```
 
 ## Pré-requisitos
@@ -67,6 +72,22 @@ npx wdio run ./wdio.conf.ts --mochaOpts.grep="CT-024"
 ```
 
 A configuração utiliza `appium:noReset: true`, então o estado do app pode persistir entre sessões. Cada cenário encerra e reativa o aplicativo antes da navegação ao catálogo.
+
+## Relatório automatizado — Allure
+
+A execução do WebdriverIO gera os arquivos de resultado em `allure-results/`. Para gerar o relatório HTML e visualizá-lo localmente, execute na pasta `Mobile`:
+
+```powershell
+npx wdio run ./wdio.conf.ts
+npx allure generate allure-results --clean -o allure-report
+npx allure open allure-report
+```
+
+**Resultado observado em 19/10/2026:** 5 cenários cadastrados, sendo **4 aprovados e 1 ignorado**. O indicador de **100%** no painel Allure é relativo aos cenários executados; não significa que o CT-025 foi validado.
+
+Os diretórios `allure-results/` e `allure-report/` são gerados localmente e estão no `.gitignore`. O projeto versiona a configuração e as capturas do resultado, não os artefatos temporários.
+
+**Evidências publicadas:** [Execução WebdriverIO](evidencias/execucao-catalogo-android.png) · [Painel Allure](evidencias/relatorio-allure-android.png)
 
 ## Evidências e limitações
 
