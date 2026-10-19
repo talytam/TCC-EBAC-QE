@@ -1,0 +1,11 @@
+node_modules/
+*.apk
+*.aab
+*.xml
+*.log
+.DS_Store
+dist/
+build/
+coverage/
+allure-results/
+allure-report/
