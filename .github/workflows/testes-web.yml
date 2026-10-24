@@ -1,0 +1,54 @@
+name: CI - Testes Web (Playwright)
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  testes-web:
+    name: Playwright - Catálogo de Produtos
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    defaults:
+      run:
+        working-directory: UI
+
+    steps:
+      - name: Obter código do repositório
+        uses: actions/checkout@v4
+
+      - name: Preparar Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+          cache: npm
+          cache-dependency-path: UI/package-lock.json
+
+      - name: Instalar dependências
+        run: npm ci
+
+      - name: Instalar Chromium e dependências
+        run: npx playwright install --with-deps chromium
+
+      - name: Executar testes de UI
+        run: npx playwright test --reporter=line,html
+        env:
+          CI: 'true'
+
+      - name: Publicar relatório e evidências
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: relatorio-playwright-ui
+          path: |
+            UI/playwright-report/
+            UI/test-results/
+          retention-days: 14
+          if-no-files-found: warn
