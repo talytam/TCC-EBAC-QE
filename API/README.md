@@ -20,7 +20,7 @@ Em **19/10/2026**, a suíte registrou **6 testes: 5 aprovados e 1 reprovado**, e
 | CT-017 | Consultar cupom inexistente | Aprovado |
 | CT-018 | Cadastrar cupom válido | Aprovado |
 | CT-019 | Impedir cadastro de código duplicado | Aprovado |
-| CT-020 | Validar campos obrigatórios do cupom | **Reprovado (BUG-004)** |
+| CT-020 | Validar campos obrigatórios do cupom | **Reprovado (divergência de critério)** |
 
 ### Evidência — Relatório HTML do Jest
 
@@ -28,9 +28,9 @@ Em **19/10/2026**, a suíte registrou **6 testes: 5 aprovados e 1 reprovado**, e
 
 [Visualizar a evidência no repositório](evidencias/relatorio-jest-api.png)
 
-## Defeito identificado — BUG-004
+## Análise do CT-020: campos de cadastro
 
-**Descrição:** segundo a especificação adotada no TCC, os campos `code`, `amount`, `discount_type` e `description` são obrigatórios. A API, porém, permite o cadastro sem três deles.
+O teste CT-020 foi programado para esperar rejeição quando qualquer um dos campos `code`, `amount`, `discount_type` e `description` estivesse ausente. A descrição textual da história utilizada na modelagem, porém, indica `code` como obrigatório e os demais campos como opcionais. Por isso, o resultado evidencia uma **inconsistência entre a expectativa adotada pelo teste e a descrição do requisito**, não um defeito confirmado da API.
 
 | Campo ausente | HTTP observado |
 |---|---|
@@ -39,7 +39,7 @@ Em **19/10/2026**, a suíte registrou **6 testes: 5 aprovados e 1 reprovado**, e
 | `discount_type` | 201 |
 | `description` | 201 |
 
-O CT-020 permanece reprovado porque valida o requisito definido para o projeto. Valores padrão do WooCommerce podem explicar parte do comportamento, mas não eliminam a divergência em relação à especificação testada.
+**Interpretação:** a rejeição por falta de `code` e a aceitação das demais omissões podem estar de acordo com a história que admite campos opcionais. O histórico da execução e a identificação interna BUG-004 foram mantidos para rastreabilidade, mas **não devem ser apresentados como falha confirmada do produto**. A evidência retrata o estado da suíte executada, sem reclassificação artificial do resultado.
 
 ## Preparação e execução
 
@@ -75,7 +75,7 @@ O Jest mantém a saída padrão no terminal e gera o arquivo `test-report.html` 
 
 ## Organização e segurança
 
-- `tests/cupons.test.js` — testes automatizados da US-0003
+- `tests/cupons.test.js` — seis testes automatizados da US-0003
 - `package.json` — comandos e configuração dos reporters
 - `evidencias/relatorio-jest-api.png` — captura do relatório
 - `.env.example` — modelo de variáveis de ambiente, sem credenciais reais
