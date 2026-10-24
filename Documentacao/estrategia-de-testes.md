@@ -1,111 +1,80 @@
-# Estratégia de Testes — EBAC Shop
+# Estratégia de testes: EBAC Shop
 
-**Projeto:** TCC — Profissão Engenheiro de Qualidade de Software (EBAC)  
-**Sistema sob teste:** EBAC Shop (e-commerce)  
-**Versão:** 0.1 — planejamento inicial  
-**Status:** Em elaboração; ferramentas e ambiente de execução sujeitos à confirmação
+**Projeto:** TCC do curso Profissão Engenheiro de Qualidade de Software, EBAC  
+**Sistemas avaliados:** EBAC Shop (Web e API WooCommerce), EBAC Store (Android) e EBAC Demo Store API (carga local)  
+**Período das execuções documentadas:** outubro de 2026  
+**Responsável:** autora do TCC
 
 ## 1. Objetivo
 
-Planejar e orientar a validação funcional e não funcional do e-commerce EBAC Shop, identificando riscos de qualidade, verificando regras de negócio e documentando resultados e defeitos com rastreabilidade entre histórias, critérios de aceitação, casos e evidências.
+Aplicar uma estratégia de Quality Engineering baseada em riscos para avaliar requisitos de negócio, identificar desvios observáveis, automatizar fluxos relevantes e registrar resultados reproduzíveis. A estratégia combina análise antecipada, técnicas de teste, investigação exploratória, automação e integração contínua.
 
-## 2. Escopo
+## 2. Escopo e critérios de cobertura
 
-**Histórias fornecidas:** US-0001 (adicionar item ao carrinho), US-0002 (login na plataforma) e US-0003 (API de cupons).
+O exercício contempla oito histórias: **US-0001** (carrinho), **US-0002** (login), **US-0003** (API de cupons) e cinco histórias elaboradas para o projeto, **US-0004 a US-0008** (catálogo, Minha Conta, pedidos, endereços e detalhes da conta).
 
-**Histórias a elaborar:** Catálogo de Produtos, Painel Minha Conta, Meus Pedidos, Endereços e Detalhes da Conta.
+Foram modelados **45 casos de teste**, incluindo fluxos principais, alternativos e negativos. O documento principal do TCC apresenta as pré-condições, os procedimentos, os resultados esperados, as classificações da execução manual e os candidatos à automação.
 
-**Plataformas exigidas pelo TCC:** interface web, API e mobile. Os fluxos específicos a automatizar serão definidos após análise dos requisitos e viabilidade dos ambientes.
+A **automação Web** cobre CT-021 a CT-025 do catálogo; a **automação Android** executou CT-021 a CT-024 e registrou CT-025 como bloqueado; a **API WooCommerce** cobre CT-015 a CT-020; a **performance** cobre duas consultas autenticadas da EBAC Demo Store API.
 
-**Fora de escopo neste momento:** testes de produção, pagamentos reais e funcionalidades sem requisitos ou acesso confirmado.
+A execução exploratória não equivale à execução integral dos 45 casos. As distinções entre aprovado, reprovado, bloqueado e não executado permanecem registradas no documento acadêmico.
 
-## 3. Abordagem
+## 3. Abordagem e fases
 
-- **Shift-left:** analisar histórias e regras antes de executar; registrar dúvidas e premissas separadamente de defeitos.
-- **Testes manuais/exploratórios:** observar fluxos, mensagens, limites e inconsistências.
-- **Testes automatizados:** selecionar fluxos repetitivos, relevantes e estáveis, contemplando ao menos um cenário principal e um alternativo conforme o enunciado.
-- **Testes não funcionais:** elaborar e executar testes de performance conforme etapa específica do TCC; registrar ambiente, carga e resultados.
-- **Rastreabilidade:** história → critério de aceitação → caso de teste → execução → evidência/defeito.
+1. **Análise de requisitos:** interpretação das regras das histórias fornecidas, levantamento de premissas e especificação de comportamentos observáveis.
+2. **Critérios de aceitação:** cenários em Gherkin para US-0001, US-0002 e US-0003, com cobertura de condições normais e negativas.
+3. **Modelagem:** definição de identificadores CT, pré-condições, passos, resultados esperados, técnicas e indicação de automação.
+4. **Investigação exploratória:** observação da EBAC Shop, uso de contas e produtos de teste, registro de comportamento e evidências.
+5. **Automação:** Playwright/TypeScript para Web, Supertest/Jest para API e WebdriverIO/Appium para Android, utilizando Page Object Model quando aplicável.
+6. **Desempenho:** k6 com 20 VUs, ramp-up de 20 segundos e duração programada de dois minutos em dois cenários.
+7. **Integração contínua:** GitHub Actions para execução automatizada dos cinco casos Web, com relatório HTML como artefato.
+8. **Consolidação:** comparação dos resultados com os critérios, documentação das restrições de ambiente e rastreabilidade no Word e no repositório.
 
 ## 4. Níveis, tipos e técnicas
 
-**Nível principal:** sistema; verificações de API em nível de serviço e integração quando aplicáveis.
+- **Níveis:** sistema para os fluxos Web e Android; testes de serviço/contrato em API; teste de carga sobre API local.
+- **Tipos:** funcional, exploratório, regressão, contrato de API e desempenho.
+- **Técnicas:** partição de equivalência, valor-limite, tabela de decisão, transição de estados, suposição de erros e testes baseados em riscos.
+- **Padrões e organização:** Page Object Model nos testes de interface, centralização de configurações, variáveis de ambiente para credenciais, identificadores CT/US e registros de execução.
 
-**Tipos:** funcional, regressão, exploratório, contrato de API, desempenho e verificações básicas de usabilidade e responsividade conforme escopo.
+## 5. Ambientes, ferramentas e evidências
 
-**Técnicas:** partição de equivalência, análise de valor-limite, tabela de decisão, transição de estados (quando aplicável), testes baseados em riscos e suposição de erros.
+| Frente | Ambiente e tecnologia | Registro |
+| :--- | :--- | :--- |
+| Web | EBAC Shop pública; Playwright, TypeScript e Chromium | [UI](../UI/README.md), 5/5 aprovados |
+| API | WooCommerce da EBAC Shop; Jest e Supertest | [API](../API/README.md), 5 aprovados e 1 reprovado na suíte registrada |
+| Android | EBAC Store, emulador Android, Appium e WebdriverIO | [Mobile](../Mobile/README.md), 4 aprovados e 1 bloqueado |
+| Performance | EBAC Demo Store API local, NestJS/PostgreSQL/Docker e k6 | [Performance](../Performance/README.md), 2 cenários aprovados |
+| Integração contínua | GitHub Actions, Linux, Node.js e Playwright | [CI](ci-github-actions.md), 5 testes Web aprovados |
 
-**Cobertura esperada:** fluxo principal, fluxos alternativos e negativos, limites e combinações relevantes.
+A estratégia usa **ambientes diferentes para finalidades diferentes**. Os números obtidos em performance local não representam o desempenho do site público nem do aplicativo Android.
 
-## 5. Etapas de execução
+## 6. Critérios de entrada e de conclusão
 
-1. Analisar o enunciado, as histórias e eventuais ambiguidades.
-2. Consolidar a estratégia e produzir mapa mental.
-3. Definir critérios de aceitação em Gherkin para US-0001, US-0002 e US-0003 (mínimo quatro por história).
-4. Criar as cinco novas histórias solicitadas.
-5. Modelar ao menos quatro casos de teste por história, identificando candidatos à automação.
-6. Preparar ambiente e massas de teste.
-7. Executar testes manuais/exploratórios e registrar evidências/defeitos.
-8. Implementar automação web, API e mobile conforme o enunciado; em API utilizar Supertest e validar contratos.
-9. Executar testes de performance com k6 e configurar pipeline de CI conforme exigências.
-10. Consolidar resultados, limitações e documentação final no formato solicitado pela EBAC.
+**Entrada:** acesso ao ambiente correspondente, condição inicial reproduzível, dados de teste, regra ou comportamento esperado documentado e ferramenta disponível.
 
-## 6. Ferramentas e ambientes
+**Conclusão do exercício:** cenários automatizados executados e relatados com evidências; resultados manuais documentados com sua situação real; limitações de massa e ambiente identificadas; achados distinguindo defeito confirmado de divergência de hipótese; código e relatório acadêmico versionados.
 
-| Uso | Ferramenta/ambiente | Situação |
-| --- | --- | --- |
-| Gestão de versões e evidências | GitHub — `talytam/TCC-EBAC-QE` | Disponível |
-| E-commerce | `http://lojaebac.ebaconline.art.br/` | Acesso utilizado em investigação inicial |
-| Ambiente local alternativo | Imagens Docker da EBAC Shop e banco fornecidas no enunciado | Não validado |
-| Automação web | Framework a escolher após comparar pelo menos três opções | Pendente |
-| Automação de API | Supertest (obrigatório no enunciado) | Planejado |
-| Automação mobile | Ferramenta e dispositivo/ambiente a definir | Pendente |
-| Performance | k6 | Planejado |
-| CI | GitHub Actions | Planejado |
-| Mapa mental | Ferramenta a definir; exportar imagem para o documento | Pendente |
+Um resultado reprovado ou bloqueado não é convertido em aprovado apenas para melhorar a apresentação do projeto.
 
-Não pressupor disponibilidade de dados, endpoints, dispositivos ou ambiente Docker antes de verificá-los.
+## 7. Riscos, controles e delimitações
 
-## 7. Papéis e responsabilidades
+| Risco | Controle adotado |
+| :--- | :--- |
+| Dados e elementos da loja compartilhada mudarem | Utilizar massas de teste identificáveis e registrar data/ambiente |
+| Requisito de cupom ambíguo | Registrar a divergência entre descrição textual, expectativa do CT-020 e resposta real, sem atribuir causa técnica não comprovada |
+| Conta de teste ser bloqueada ou alterada | Isolar credenciais, controlar tentativas, não publicar segredos |
+| Bloqueio de categoria no Android | Conservar CT-025 como `skipped` e documentar limitação de massa/interface |
+| Falso positivo de automação | Asserções de status, estrutura e conteúdo, testes independentes e logs |
+| Resultado de carga não generalizável | Relatar VUs, duração, percentis, taxa de falhas e ambiente local |
+| Dependências externas no CI | Restringir workflow à suíte Web executável no runner; disponibilizar HTML de evidência |
 
-**Responsável pela execução do TCC:** estudante autora do projeto — estratégia, modelagem, automação, execução, registro dos achados e entrega.
+## 8. Resultados consolidados
 
-**Tutor(a) EBAC:** avaliação da entrega conforme requisitos do curso; não considerado executor dos testes.
+- **Web:** cinco testes Playwright aprovados localmente e na primeira execução do GitHub Actions.
+- **API:** cinco testes aprovados; CT-020 reprovado devido à expectativa de rejeição para campos que a descrição da história trata como opcionais. Esse resultado revela uma **inconsistência a ser interpretada na especificação/teste**, não comprova isoladamente um defeito da API.
+- **Android:** quatro testes aprovados; CT-025 bloqueado por limitações na seleção estável de categoria.
+- **Performance:** Produtos com p95 de 16,96 ms e Clientes com p95 de 17,47 ms nos JSONs versionados, 0% de falhas HTTP em ambos, 20 VUs e dois minutos de carga programada.
+- **Investigação manual:** identificados os achados BUG-001 e BUG-002 (regras do carrinho) e BUG-003 (bloqueio de login) frente às regras adotadas no TCC.
 
-## 8. Riscos e mitigação
-
-| Risco | Tratamento |
-| --- | --- |
-| Requisitos ambíguos ou incompletos | Registrar dúvida, premissa e impacto; não inventar comportamento esperado |
-| Instabilidade/indisponibilidade da loja pública | Registrar impedimento e avaliar execução com Docker |
-| Massa inconsistente ou dependência entre cenários | Preparar dados e restaurar estado antes de cada teste |
-| Falsos positivos em automação | Esperas por condições, asserções objetivas e isolamento |
-| Dependência de serviços externos | Documentar limitações e diferenciar falha ambiental de defeito |
-| Alterações não controladas no ambiente compartilhado | Usar produtos e contas de teste e evitar ações irreversíveis |
-
-## 9. Critérios de entrada e saída
-
-**Entrada:** histórias/regras acessíveis, ambiente operante, massas disponíveis e passos/resultado esperado definidos.
-
-**Saída:** casos planejados executados ou marcados como bloqueados/não executados com justificativa; defeitos e evidências rastreáveis; relatórios das automações, performance e CI anexados; limitações explicitadas. Não exigir ausência total de defeitos para concluir um exercício cujo propósito também é identificá-los.
-
-## 10. Achados preliminares — US-0001
-
-Investigação manual inicial em 18/10/2026, a consolidar em registros próprios:
-
-- Inclusão de uma unidade do produto `Torque Power Short – 32, Gray` por R$ 32,50: comportamento observado como esperado.
-- Foi possível chegar a 53 unidades do mesmo produto, apesar da regra de máximo 10.
-- A página do carrinho também aceitou a atualização de 10 para 11 unidades, recalculando o valor para R$ 357,50.
-- Foi observado um subtotal de R$ 1.722,50, apesar da regra de limite de R$ 990,00.
-- O carrinho oferece campo para código de cupom; ainda não foi esclarecido se os descontos previstos dependem de cupom ou são automáticos.
-
-**Status:** evidências visuais recebidas na conversa; ainda pendente organizar e adicionar ao repositório. Não considerar a US-0001 integralmente validada.
-
-## 11. Pendências e decisões
-
-- Confirmar escopo e ferramentas de automação web/mobile, após consultar o restante do enunciado.
-- Elaborar o mapa mental correspondente a esta estratégia e inseri-lo no documento de entrega.
-- Esclarecer se R$ 990,00 é limite antes ou depois de desconto.
-- Esclarecer geração/aplicação de cupons de 10% e 15%, inclusive faixas e limites.
-- Elaborar e salvar os critérios Gherkin e os casos em arquivos dedicados.
-- Definir massa de testes e registrar evidências com nomenclatura consistente.
+A apresentação detalhada de critérios Gherkin, 45 casos modelados e suas classificações de execução consta no **documento principal do TCC**. Este arquivo sintetiza a estratégia efetivamente aplicada; não substitui o relatório acadêmico.
