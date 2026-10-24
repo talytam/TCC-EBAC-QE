@@ -101,6 +101,14 @@ npx playwright test --reporter=html
 npx playwright show-report
 ```
 
+## Integração contínua — GitHub Actions
+
+A suíte Web também é executada automaticamente pelo workflow [**CI - Testes Web (Playwright)**](../.github/workflows/testes-web.yml), em `push` e `pull_request` para a branch `main`, além da execução manual.
+
+Na [primeira execução do GitHub Actions (24/10/2026)](https://github.com/talytam/TCC-EBAC-QE/actions/runs/40125899136), os **cinco testes foram aprovados** (`5 passed`), e o relatório HTML foi disponibilizado como artefato `relatorio-playwright-ui`.
+
+Consulte a [**documentação do pipeline, resultados e evidências de CI**](../Documentacao/ci-github-actions.md).
+
 ## Evidências e cuidados
 
 ### Evidência UI-001 — Execução automatizada do catálogo
