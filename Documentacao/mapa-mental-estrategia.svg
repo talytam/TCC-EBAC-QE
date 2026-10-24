@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 960" width="1600" height="960" role="img" aria-label="Mapa mental da estratégia de testes do TCC EBAC Shop"><rect width="1600" height="960" fill="#f5f7fb"/><text x="800" y="40" font-size="28" font-family="Arial,sans-serif" fill="#243349" font-weight="700" text-anchor="middle">Estratégia de Testes • TCC EBAC Shop</text>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 960" width="1600" height="960" role="img" aria-label="Mapa mental da estratégia de testes do TCC EBAC Shop"><rect width="1600" height="960" fill="#f5f7fb"/><text x="800" y="40" font-size="28" font-family="Arial,sans-serif" fill="#243349" font-weight="700" text-anchor="middle">Estratégia de testes: TCC EBAC Shop</text>
 <path d="M 552 152 C 600 152, 590 475, 630 475" stroke="#286b70" stroke-width="5" fill="none" opacity=".62"/>
 <rect x="42" y="70" width="505" height="172" rx="19" fill="#fff" stroke="#286b70" stroke-width="2.5"/><rect x="42" y="70" width="10" height="172" rx="5" fill="#286b70"/><text x="72" y="109" fill="#286b70" font-family="Arial,sans-serif" font-weight="700" font-size="26">Objetivos</text>
 <text x="72" y="147" font-family="Arial,sans-serif" font-size="19" fill="#28354a">• Validar regras e fluxos da EBAC Shop</text>
@@ -26,9 +26,9 @@
 <text x="1080" y="201" font-family="Arial,sans-serif" font-size="19" fill="#28354a">• Exploratório • performance</text>
 <path d="M 1045 367 C 1000 367, 1010 475, 970 475" stroke="#5977ad" stroke-width="5" fill="none" opacity=".62"/>
 <rect x="1050" y="285" width="505" height="172" rx="19" fill="#fff" stroke="#5977ad" stroke-width="2.5"/><rect x="1050" y="285" width="10" height="172" rx="5" fill="#5977ad"/><text x="1080" y="324" fill="#5977ad" font-family="Arial,sans-serif" font-weight="700" font-size="26">Ambientes e ferramentas</text>
-<text x="1080" y="362" font-family="Arial,sans-serif" font-size="19" fill="#28354a">• EBAC Shop pública ou Docker</text>
-<text x="1080" y="389" font-family="Arial,sans-serif" font-size="19" fill="#28354a">• Web: ferramenta a definir; API: Supertest</text>
-<text x="1080" y="416" font-family="Arial,sans-serif" font-size="19" fill="#28354a">• Mobile a definir • k6 • GitHub Actions</text>
+<text x="1080" y="362" font-family="Arial,sans-serif" font-size="19" fill="#28354a">• Web pública e API de carga local</text>
+<text x="1080" y="389" font-family="Arial,sans-serif" font-size="19" fill="#28354a">• Web: Playwright • API: Supertest/Jest</text>
+<text x="1080" y="416" font-family="Arial,sans-serif" font-size="19" fill="#28354a">• Android: Appium/WDIO • k6 • CI</text>
 <path d="M 1045 582 C 1000 582, 1010 475, 970 475" stroke="#7a59a1" stroke-width="5" fill="none" opacity=".62"/>
 <rect x="1050" y="500" width="505" height="172" rx="19" fill="#fff" stroke="#7a59a1" stroke-width="2.5"/><rect x="1050" y="500" width="10" height="172" rx="5" fill="#7a59a1"/><text x="1080" y="539" fill="#7a59a1" font-family="Arial,sans-serif" font-weight="700" font-size="26">Papéis e padrões</text>
 <text x="1080" y="577" font-family="Arial,sans-serif" font-size="19" fill="#28354a">• Estudante: planejar, testar e reportar</text>
@@ -38,5 +38,5 @@
 <rect x="1050" y="715" width="505" height="172" rx="19" fill="#fff" stroke="#ad7347" stroke-width="2.5"/><rect x="1050" y="715" width="10" height="172" rx="5" fill="#ad7347"/><text x="1080" y="754" fill="#ad7347" font-family="Arial,sans-serif" font-weight="700" font-size="26">Riscos e critérios</text>
 <text x="1080" y="792" font-family="Arial,sans-serif" font-size="19" fill="#28354a">• Regras ambíguas; ambiente instável</text>
 <text x="1080" y="819" font-family="Arial,sans-serif" font-size="19" fill="#28354a">• Massa de teste; falsos positivos</text>
-<text x="1080" y="846" font-family="Arial,sans-serif" font-size="19" fill="#28354a">• Registrar bloqueios e pendências</text>
-<rect x="628" y="382" width="344" height="186" rx="28" fill="#243349"/><text x="800" y="445" font-size="30" font-weight="700" fill="#fff" text-anchor="middle" font-family="Arial,sans-serif">EBAC SHOP</text><text x="800" y="484" font-size="25" fill="#d7e6f5" text-anchor="middle" font-family="Arial,sans-serif">Quality Engineering</text><text x="800" y="525" font-size="18" fill="#c5d4e1" text-anchor="middle" font-family="Arial,sans-serif">Plano inicial • versão 0.1</text><text x="800" y="942" font-family="Arial,sans-serif" font-size="17" text-anchor="middle" fill="#65758b">Fonte: estratégia de testes do TCC • Ferramentas e ambientes ainda sujeitos à confirmação</text></svg>
+<text x="1080" y="846" font-family="Arial,sans-serif" font-size="19" fill="#28354a">• Registrar riscos e limitações</text>
+<rect x="628" y="382" width="344" height="186" rx="28" fill="#243349"/><text x="800" y="445" font-size="30" font-weight="700" fill="#fff" text-anchor="middle" font-family="Arial,sans-serif">EBAC SHOP</text><text x="800" y="484" font-size="25" fill="#d7e6f5" text-anchor="middle" font-family="Arial,sans-serif">Quality Engineering</text><text x="800" y="525" font-size="18" fill="#c5d4e1" text-anchor="middle" font-family="Arial,sans-serif">Estratégia aplicada • outubro/2026</text><text x="800" y="942" font-family="Arial,sans-serif" font-size="17" text-anchor="middle" fill="#65758b">Fonte: estratégia executada no TCC EBAC Shop • Resultados e limites registrados</text></svg>
