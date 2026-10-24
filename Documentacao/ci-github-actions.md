@@ -85,7 +85,7 @@ Os números foram conferidos nos **logs do job da primeira execução**. Eles re
 
 Este workflow automatiza **somente a suíte Web/Playwright**. As seguintes atividades **não são executadas por este pipeline**:
 
-- **API — Supertest/Jest:** depende de credenciais de teste e mantém um cenário reprovado documentado (CT-020 / BUG-004).
+- **API (Supertest/Jest):** depende de credenciais de teste; na execução registrada, CT-020 reprovou por divergência entre a expectativa do teste e o tratamento de campos opcionais descrito na história.
 - **Mobile — Appium/WebdriverIO:** depende de infraestrutura Android, emulador e servidor Appium. Um cenário mobile permanece bloqueado no registro da suíte.
 - **Performance — k6:** foi executada e documentada separadamente, em ambiente local, conforme os resultados de [Performance](../Performance/README.md).
 
