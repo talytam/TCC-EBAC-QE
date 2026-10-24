@@ -9,12 +9,12 @@ O objetivo é aplicar práticas de qualidade de software à **EBAC Shop / EBAC S
 | Frente | Tecnologias | Resultado registrado | Documentação |
 | :--- | :--- | :--- | :--- |
 | **Web** | Playwright · TypeScript · POM | **5 aprovados / 5** | [UI/README.md](UI/README.md) |
-| **API** | Supertest · Jest · JavaScript | **5 aprovados / 6** — 1 reprovado, BUG-004 | [API/README.md](API/README.md) |
+| **API** | Supertest · Jest · JavaScript | **5 aprovados / 6**; CT-020 reprovado por divergência de critério | [API/README.md](API/README.md) |
 | **Mobile (Android)** | WebdriverIO · Appium · TypeScript · Allure | **4 aprovados / 5** — 1 bloqueado | [Mobile/README.md](Mobile/README.md) |
 | **Performance** | Grafana k6 · JavaScript | **2 cenários aprovados** | [Performance/README.md](Performance/README.md) |
 | **Integração contínua** | GitHub Actions · Playwright | **5 testes Web aprovados** na primeira execução | [Documentação do CI](Documentacao/ci-github-actions.md) |
 
-> **Importante:** “reprovado” e “bloqueado” são resultados distintos. O cenário reprovado de API foi mantido para evidenciar um comportamento divergente; o cenário bloqueado de Mobile não foi considerado aprovado. Os números representam as execuções documentadas, não a execução simultânea de todas as frentes.
+> **Importante:** “reprovado” e “bloqueado” são resultados distintos. O teste de API reprovado foi preservado como resultado da suíte, e sua expectativa foi analisada frente à descrição do requisito; o cenário bloqueado de Mobile não foi considerado aprovado. Os números representam as execuções documentadas, não a execução simultânea de todas as frentes.
 
 ## Organização do repositório
 
@@ -41,6 +41,7 @@ TCC-EBAC-QE/
 │   ├── evidencias/
 │   └── README.md
 ├── Documentacao/
+│   ├── TCC_EBAC_QE_Entrega_Final.docx
 │   ├── estrategia-de-testes.md
 │   ├── mapa-mental-estrategia.svg
 │   └── ci-github-actions.md
@@ -61,7 +62,7 @@ A documentação reúne a abordagem de testes, escopo, riscos, técnicas, crité
 - [Estratégia de testes](Documentacao/estrategia-de-testes.md)
 - [Mapa mental da estratégia](Documentacao/mapa-mental-estrategia.svg)
 
-*A estratégia foi criada como documento inicial de planejamento e ainda precisa de revisão para refletir o estado final do projeto e a documentação exigida na entrega do TCC.*
+A estratégia e o mapa mental estão alinhados às técnicas, ferramentas e ambientes utilizados nas execuções documentadas.
 
 ### 2. Automação Web — Playwright
 
@@ -75,13 +76,13 @@ Automação da **US-0004 — Catálogo de Produtos**, cobrindo listagem, detalhe
 
 ### 3. Testes de API — Supertest e Jest
 
-Automação da **US-0003 — API de Cupons**, incluindo consulta, validação de contrato, cadastro, duplicidade e campos obrigatórios.
+Automação da **US-0003 — API de Cupons**, incluindo consulta, validação de contrato, cadastro, duplicidade e análise de campos opcionais/obrigatórios.
 
 - **Resultado:** 5 testes aprovados e 1 reprovado.
-- **BUG-004 / CT-020:** a especificação adotada exige campos que a API aceitou omitir em parte dos cadastros.
+- **CT-020:** o teste exigia rejeição de campos cuja descrição funcional os tratava como opcionais; a reprovação indica divergência de expectativa, não defeito confirmado da API.
 - **Evidência:** [relatório Jest](API/evidencias/relatorio-jest-api.png).
 
-A reprovação foi preservada na suíte e documentada como resultado de teste, sem alterar a expectativa apenas para obter uma execução totalmente verde.
+A reprovação foi mantida com interpretação técnica, preservando a rastreabilidade da execução e evitando um falso positivo de defeito.
 
 [Ver implementação e análise do defeito](API/README.md)
 
@@ -135,11 +136,11 @@ Os projetos possuem dependências e ambientes de execução diferentes. Consulte
 
 Credenciais e variáveis sensíveis devem ser configuradas localmente, conforme os exemplos existentes no projeto. **Não publique senhas, tokens ou arquivos `.env`.**
 
-## Limitações e próximos passos de documentação
+## Delimitações e critérios de interpretação
 
-Os resultados refletem os ambientes e as datas das execuções registradas. A loja pública e os dados de teste podem mudar; os testes Mobile dependem de emulador e Appium; a API possui um defeito documentado; e a performance foi avaliada apenas com a carga e a duração definidas para o exercício.
+Os resultados refletem os ambientes e as datas das execuções registradas. A loja pública e os dados de teste podem mudar; os testes Mobile dependem de emulador e Appium; a suíte de API apresenta uma divergência de critério documentada; e a performance foi avaliada apenas com a carga e a duração definidas para o exercício.
 
-Para a entrega acadêmica, ainda é necessário **conferir e consolidar** os critérios Gherkin, as histórias e os casos de teste exigidos no enunciado, atualizar a estratégia inicial e revisar o **documento final em Word** no modelo solicitado pela EBAC. Esses itens não estão sendo apresentados como concluídos apenas pela existência deste repositório.
+As três histórias fornecidas foram detalhadas com critérios Gherkin, cinco histórias adicionais foram elaboradas e **45 casos** foram modelados no documento acadêmico, que reúne resultados, premissas, evidências e interpretação dos achados. O conjunto de testes executados corresponde aos cenários e ambientes apresentados acima; os demais casos foram documentados com sua situação própria, sem atribuição de aprovação indevida.
 
 ---
 
