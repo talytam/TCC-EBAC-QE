@@ -4,6 +4,8 @@ Repositório do **Trabalho de Conclusão de Curso (TCC)** da formação em Engen
 
 O objetivo é aplicar práticas de qualidade de software à **EBAC Shop / EBAC Store**, documentando cenários, ferramentas, resultados, evidências e limitações encontradas durante a execução.
 
+**Documento acadêmico de entrega:** [Análise de Qualidade: EBAC Shop (Word)](Documentacao/TCC_EBAC_QE_Entrega_Final.docx).
+
 ## Visão geral dos resultados
 
 | Frente | Tecnologias | Resultado registrado | Documentação |
