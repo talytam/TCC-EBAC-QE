@@ -22,6 +22,20 @@ Automação de testes funcionais do aplicativo Android **EBAC Store**, como part
 
 **Última execução registrada:** 19/10/2026 — **4 passing, 1 skipped, 0 failing**; última execução com Allure em aproximadamente **2min57s**. O status `skipped` do WebdriverIO corresponde a um cenário **bloqueado**, não aprovado, na documentação de QA.
 
+## Melhoria pós-avaliação (27/10/2026)
+
+O **CT-022** foi atualizado para **pesquisar `Camiseta EBAC` e selecionar explicitamente o card cujo `content-desc` contém esse nome**. A seleção está centralizada no Page Object `CatalogoPage.selecionarProdutoPorNome()`.
+
+A mudança elimina a dependência da ordem dos produtos: a tela de detalhes continua validando os valores conhecidos da Camiseta EBAC, mas agora o teste garante que esse foi o produto aberto.
+
+As evidências e contagens de **19/10/2026** continuam preservadas como histórico da suíte anterior à melhoria. A validação da alteração requer nova execução no Android com Appium e emulador.
+
+**Executar apenas CT-022:**
+
+```powershell
+npx wdio run ./wdio.conf.ts --mochaOpts.grep="CT-022"
+```
+
 ## Estrutura
 
 ```text

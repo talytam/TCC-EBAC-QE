@@ -56,6 +56,21 @@ O arquivo de configuração limita o job a 20 minutos, e o artefato tem retenç�
 
 Os números foram conferidos nos **logs do job da primeira execução**. Eles representam essa execução específica, não uma garantia de aprovação permanente em execuções futuras.
 
+## Reexecução após melhorias de automação (27/10/2026)
+
+A versão posterior à avaliação técnica incluiu validações adicionais no **CT-025: filtro por categoria**. Além de verificar um produto conhecido, o teste confirma a categoria selecionada no formulário e o parâmetro `product_cat=shorts` após a busca.
+
+| Indicador | Resultado |
+| :--- | :--- |
+| Execução | [Workflow de 27/10/2026](https://github.com/talytam/TCC-EBAC-QE/actions/runs/40614328999) |
+| Testes executados | 5 |
+| Testes aprovados | **5** |
+| Testes reprovados | **0** |
+| Tempo dos testes (logs) | **28,6 segundos** |
+| Relatório | `relatorio-playwright-ui` gerado e publicado |
+
+A execução de 24/10/2026 e as capturas originais são mantidas como histórico. A reexecução foi verificada pelos logs e relatório do GitHub Actions, sem substituir as evidências anteriores.
+
 ## Evidências
 
 ### Evidência CI-001 — Resultado do workflow

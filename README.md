@@ -14,7 +14,7 @@ O objetivo é aplicar práticas de qualidade de software à **EBAC Shop / EBAC S
 | **API** | Supertest · Jest · JavaScript | **5 aprovados / 6**; CT-020 reprovado por divergência de critério | [API/README.md](API/README.md) |
 | **Mobile (Android)** | WebdriverIO · Appium · TypeScript · Allure | **4 aprovados / 5** — 1 bloqueado | [Mobile/README.md](Mobile/README.md) |
 | **Performance** | Grafana k6 · JavaScript | **2 cenários aprovados** | [Performance/README.md](Performance/README.md) |
-| **Integração contínua** | GitHub Actions · Playwright | **5 testes Web aprovados** na primeira execução | [Documentação do CI](Documentacao/ci-github-actions.md) |
+| **Integração contínua** | GitHub Actions · Playwright | **5 testes Web aprovados**, inclusive na reexecução pós-avaliação | [Documentação do CI](Documentacao/ci-github-actions.md) |
 
 > **Importante:** “reprovado” e “bloqueado” são resultados distintos. O teste de API reprovado foi preservado como resultado da suíte, e sua expectativa foi analisada frente à descrição do requisito; o cenário bloqueado de Mobile não foi considerado aprovado. Os números representam as execuções documentadas, não a execução simultânea de todas as frentes.
 
@@ -80,7 +80,8 @@ Automação da **US-0004 — Catálogo de Produtos**, cobrindo listagem, detalhe
 
 Automação da **US-0003 — API de Cupons**, incluindo consulta, validação de contrato, cadastro, duplicidade e análise de campos opcionais/obrigatórios.
 
-- **Resultado:** 5 testes aprovados e 1 reprovado.
+- **Resultado histórico (19/10/2026):** 5 testes aprovados e 1 reprovado.
+- **Melhoria pós-avaliação:** CT-020 foi corrigido para diferenciar o campo obrigatório dos opcionais; nova execução local deve ser registrada separadamente.
 - **CT-020:** o teste exigia rejeição de campos cuja descrição funcional os tratava como opcionais; a reprovação indica divergência de expectativa, não defeito confirmado da API.
 - **Evidência:** [relatório Jest](API/evidencias/relatorio-jest-api.png).
 
@@ -92,7 +93,8 @@ A reprovação foi mantida com interpretação técnica, preservando a rastreabi
 
 Testes funcionais do catálogo no aplicativo **EBAC Store**, usando Appium, WebdriverIO, TypeScript e relatórios Allure.
 
-- **Resultado:** 4 testes aprovados e 1 cenário bloqueado.
+- **Resultado histórico (19/10/2026):** 4 testes aprovados e 1 cenário bloqueado.
+- **Melhoria pós-avaliação:** CT-022 passou a selecionar a Camiseta EBAC explicitamente; nova execução local deve ser registrada separadamente.
 - **CT-025:** o filtro por categoria não pôde ser automatizado de maneira estável no ambiente testado; foi registrado como `skipped`, sem ser tratado como aprovação.
 - **Evidências:** [execução Android](Mobile/evidencias/execucao-catalogo-android.png) e [relatório Allure](Mobile/evidencias/relatorio-allure-android.png).
 
@@ -120,7 +122,8 @@ Dois cenários de carga para endpoints autenticados da API local: **consulta de 
 
 Um workflow executa a **suíte Web/Playwright** no GitHub, com instalação de dependências e Chromium, execução dos testes e disponibilização do relatório HTML como artefato.
 
-- **Primeira execução registrada (24/10/2026):** [Success — 5 passed](https://github.com/talytam/TCC-EBAC-QE/actions/runs/40125899136).
+- **Execução inicial (24/10/2026):** [Success — 5 passed](https://github.com/talytam/TCC-EBAC-QE/actions/runs/40125899136).
+- **Reexecução após melhorias (27/10/2026):** [Success — 5 passed](https://github.com/talytam/TCC-EBAC-QE/actions/runs/40614328999), incluindo a validação reforçada do filtro CT-025.
 - **Escopo do pipeline:** testes Web; as suítes API, Mobile e Performance não fazem parte desse workflow.
 - **Evidências:** [resultado do pipeline](Evidencias/CI/CT-GitHub-Actions-Execucao.png) e [logs dos testes](Evidencias/CI/CT-GitHub-Actions-Testes.png).
 

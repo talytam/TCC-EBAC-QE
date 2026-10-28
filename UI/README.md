@@ -107,6 +107,8 @@ A suíte Web também é executada automaticamente pelo workflow [**CI - Testes W
 
 Na [primeira execução do GitHub Actions (24/10/2026)](https://github.com/talytam/TCC-EBAC-QE/actions/runs/40125899136), os **cinco testes foram aprovados** (`5 passed`), e o relatório HTML foi disponibilizado como artefato `relatorio-playwright-ui`.
 
+**Reexecução após o feedback do tutor (27/10/2026):** [GitHub Actions #40614328999](https://github.com/talytam/TCC-EBAC-QE/actions/runs/40614328999), com **5 testes aprovados em 28,6 segundos**. O CT-025 agora confirma a opção `Shorts` selecionada e a aplicação de `product_cat=shorts` na URL, além de verificar o produto retornado. O relatório HTML da reexecução foi gerado como artefato.
+
 Consulte a [**documentação do pipeline, resultados e evidências de CI**](../Documentacao/ci-github-actions.md).
 
 ## Evidências e cuidados

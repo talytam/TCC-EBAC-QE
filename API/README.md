@@ -11,7 +11,7 @@ Automação da **US-0003 — API de Cupons**, desenvolvida para o TCC de Quality
 
 ## Resultado da execução
 
-Em **19/10/2026**, a suíte registrou **6 testes: 5 aprovados e 1 reprovado**, em **16,141 segundos** (tempo total informado pelo Jest). A reprovação corresponde ao **CT-020 / BUG-004**, que permanece como evidência de comportamento divergente, e não deve ser ocultada.
+Em **19/10/2026**, a suíte registrou **6 testes: 5 aprovados e 1 reprovado**, em **16,141 segundos** (tempo total informado pelo Jest). A reprovação histórica corresponde ao **CT-020**, cuja primeira implementação exigia rejeição indevida de campos opcionais. A evidência anterior permanece preservada.
 
 | ID | Cenário | Resultado |
 |---|---|---|
@@ -40,6 +40,22 @@ O teste CT-020 foi programado para esperar rejeição quando qualquer um dos cam
 | `description` | 201 |
 
 **Interpretação:** a rejeição por falta de `code` e a aceitação das demais omissões podem estar de acordo com a história que admite campos opcionais. O histórico da execução e a identificação interna BUG-004 foram mantidos para rastreabilidade, mas **não devem ser apresentados como falha confirmada do produto**. A evidência retrata o estado da suíte executada, sem reclassificação artificial do resultado.
+
+## Melhoria pós-avaliação (27/10/2026)
+
+Após o feedback técnico do tutor, o **código do CT-020 foi corrigido** em `tests/cupons.test.js`.
+
+- `code` omitido: espera-se **HTTP 400**, com `code` e `message` de erro.
+- `amount`, `discount_type` e `description` omitidos individualmente: espera-se **HTTP 201**, com `id` e estrutura de resposta válidos.
+- Em todos os cadastros bem-sucedidos, o cupom é removido em um bloco `finally`, inclusive se alguma asserção falhar.
+
+A captura anterior continua representando a execução de **19/10/2026**; ela não é evidência de execução da versão corrigida. A nova execução com credenciais locais deve ser registrada separadamente, sem substituir os resultados históricos.
+
+**Para validar especificamente a correção:**
+
+```powershell
+npx jest tests/cupons.test.js --runInBand -t "CT-020"
+```
 
 ## Preparação e execução
 
