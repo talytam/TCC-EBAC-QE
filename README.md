@@ -12,7 +12,7 @@ O objetivo é aplicar práticas de qualidade de software à **EBAC Shop / EBAC S
 | :--- | :--- | :--- | :--- |
 | **Web** | Playwright · TypeScript · POM | **5 aprovados / 5** | [UI/README.md](UI/README.md) |
 | **API** | Supertest · Jest · JavaScript | Histórico: **5/6 aprovados**; reteste isolado **CT-020 aprovado em 28/10** | [API/README.md](API/README.md) |
-| **Mobile (Android)** | WebdriverIO · Appium · TypeScript · Allure | **4 aprovados / 5** — 1 bloqueado | [Mobile/README.md](Mobile/README.md) |
+| **Mobile (Android)** | WebdriverIO · Appium · TypeScript · Allure | Histórico: **4/5 aprovados, 1 bloqueado**; **CT-022 aprovado em reteste isolado** | [Mobile/README.md](Mobile/README.md) |
 | **Performance** | Grafana k6 · JavaScript | **2 cenários aprovados** | [Performance/README.md](Performance/README.md) |
 | **Integração contínua** | GitHub Actions · Playwright | **5 testes Web aprovados**, inclusive na reexecução pós-avaliação | [Documentação do CI](Documentacao/ci-github-actions.md) |
 
@@ -94,9 +94,9 @@ A reprovação foi mantida com interpretação técnica, preservando a rastreabi
 Testes funcionais do catálogo no aplicativo **EBAC Store**, usando Appium, WebdriverIO, TypeScript e relatórios Allure.
 
 - **Resultado histórico (19/10/2026):** 4 testes aprovados e 1 cenário bloqueado.
-- **Melhoria pós-avaliação:** CT-022 passou a selecionar a Camiseta EBAC explicitamente; nova execução local deve ser registrada separadamente.
+- **Melhoria pós-avaliação:** CT-022 passou a selecionar a Camiseta EBAC explicitamente; **reteste isolado em 27/10/2026 (horário de Brasília): aprovado** (1 passing).
 - **CT-025:** o filtro por categoria não pôde ser automatizado de maneira estável no ambiente testado; foi registrado como `skipped`, sem ser tratado como aprovação.
-- **Evidências:** [execução Android](Mobile/evidencias/execucao-catalogo-android.png) e [relatório Allure](Mobile/evidencias/relatorio-allure-android.png).
+- **Evidências:** [execução histórica Android](Mobile/evidencias/execucao-catalogo-android.png), [relatório Allure](Mobile/evidencias/relatorio-allure-android.png) e [registro do reteste CT-022](Mobile/evidencias/CT-022-reteste-2026-10-28.md).
 
 [Ver implementação e limitações Mobile](Mobile/README.md)
 
