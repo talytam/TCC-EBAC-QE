@@ -49,7 +49,24 @@ Após o feedback técnico do tutor, o **código do CT-020 foi corrigido** em `te
 - `amount`, `discount_type` e `description` omitidos individualmente: espera-se **HTTP 201**, com `id` e estrutura de resposta válidos.
 - Em todos os cadastros bem-sucedidos, o cupom é removido em um bloco `finally`, inclusive se alguma asserção falhar.
 
-A captura anterior continua representando a execução de **19/10/2026**; ela não é evidência de execução da versão corrigida. A nova execução com credenciais locais deve ser registrada separadamente, sem substituir os resultados históricos.
+A captura anterior continua representando a execução de **19/10/2026**, antes da correção.
+
+### Resultado do reteste — 28/10/2026
+
+Após ampliar o timeout **apenas do CT-020** para 30 segundos, foi realizada uma nova execução local, selecionando exclusivamente esse cenário com `-t "CT-020"`.
+
+**Resultado: PASS — 1 aprovado, 0 reprovados e 5 ignorados (não executados por causa do filtro).** O CT-020 levou **5.340 ms**; o tempo total informado pelo Jest foi **6,036 s**.
+
+| Campo omitido | HTTP observado | Resultado |
+|---|---:|---|
+| `code` | 400 | Conforme esperado |
+| `amount` | 201 | Conforme esperado; cupom excluído |
+| `discount_type` | 201 | Conforme esperado; cupom excluído |
+| `description` | 201 | Conforme esperado; cupom excluído |
+
+A primeira tentativa de reteste atingiu o timeout padrão de 5 segundos; após o ajuste, o cenário foi aprovado. A **suíte completa não foi reexecutada** neste registro, portanto os resultados históricos dos demais casos são mantidos.
+
+[**Consultar evidência e histórico do reteste CT-020**](evidencias/CT-020-reexecucao-2026-10-28.md).
 
 **Para validar especificamente a correção:**
 
