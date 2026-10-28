@@ -194,22 +194,26 @@ test('CT-019 - Impedir cadastro de cupom duplicado', async () => {
 });
 
 
-test('CT-020 - Validar campos obrigatorios do cupom', async () => {
-  const campos = ['code', 'amount', 'discount_type', 'description'];
+test('CT-020 - Validar campo obrigatório e campos opcionais do cupom', async () => {
+  const campos = [
+    { nome: 'code', obrigatorio: true },
+    { nome: 'amount', obrigatorio: false },
+    { nome: 'discount_type', obrigatorio: false },
+    { nome: 'description', obrigatorio: false }
+  ];
   const resultados = [];
 
   for (const campo of campos) {
     const payload = {
-      code: `tcc-${campo}-${Date.now()}`,
+      code: `tcc-campo-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`,
       amount: '10.00',
       discount_type: 'fixed_product',
-      description: 'Validacao de campos obrigatorios - TCC'
+      description: 'Validação de campos de cupom - TCC EBAC'
     };
 
-    delete payload[campo];
-
+    delete payload[campo.nome];
     let idCriado = null;
-    let statusLimpeza = 'Nao necessaria';
+    let limpeza = 'Não necessária';
 
     try {
       const response = await request(baseUrl)
@@ -224,13 +228,36 @@ test('CT-020 - Validar campos obrigatorios do cupom', async () => {
         ? response.body.id
         : null;
 
+      // Somente code é obrigatório segundo a história US-0003.
+      if (campo.obrigatorio) {
+        expect(response.status).toBe(400);
+        expect(response.body).toEqual(
+          expect.objectContaining({
+            code: expect.any(String),
+            message: expect.any(String)
+          })
+        );
+      } else {
+        expect(response.status).toBe(201);
+        expect(idCriado).not.toBeNull();
+        expect(response.body).toEqual(
+          expect.objectContaining({
+            code: payload.code,
+            amount: expect.any(String),
+            discount_type: expect.any(String),
+            description: expect.any(String)
+          })
+        );
+      }
+
       resultados.push({
-        campo,
-        status: response.status,
-        id: idCriado,
-        mensagem: response.body?.message ?? null
+        campo_omitido: campo.nome,
+        obrigatorio: campo.obrigatorio,
+        http: response.status,
+        id: idCriado
       });
     } finally {
+      // A limpeza ocorre mesmo quando uma asserção falha.
       if (idCriado !== null) {
         const exclusao = await request(baseUrl)
           .delete(`/wp-json/wc/v3/coupons/${idCriado}`)
@@ -240,30 +267,20 @@ test('CT-020 - Validar campos obrigatorios do cupom', async () => {
             process.env.API_CONSUMER_SECRET
           );
 
-        statusLimpeza = exclusao.status === 200 &&
-          exclusao.body?.id === idCriado
+        limpeza = exclusao.status === 200 && exclusao.body?.id === idCriado
           ? 'Removido'
           : `Falha HTTP ${exclusao.status}`;
+
+        expect(exclusao.status).toBe(200);
+        expect(exclusao.body.id).toBe(idCriado);
       }
 
-      const resultado = resultados[resultados.length - 1];
-
-      if (resultado?.campo === campo) {
-        resultado.limpeza = statusLimpeza;
+      const ultimo = resultados[resultados.length - 1];
+      if (ultimo?.campo_omitido === campo.nome) {
+        ultimo.limpeza = limpeza;
       }
     }
   }
 
   console.table(resultados);
-
-  expect(resultados).toHaveLength(campos.length);
-
-  const falhas = resultados.filter(
-    resultado =>
-      resultado.status < 400 ||
-      resultado.status >= 500 ||
-      resultado.limpeza.startsWith('Falha')
-  );
-
-  expect(falhas).toEqual([]);
 });

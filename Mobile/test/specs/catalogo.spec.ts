@@ -31,8 +31,18 @@ describe('US-0004 — Catálogo de Produtos', () => {
             }
         );
 
-        const produtos = await CatalogoPage.produtos;
-        await produtos[0].click();
+        await CatalogoPage.pesquisarProduto('Camiseta EBAC');
+
+        await browser.waitUntil(
+            async () => (await CatalogoPage.quantidadeProdutos()) > 0,
+            {
+                timeout: 15000,
+                timeoutMsg: 'Nenhum produto retornado ao pesquisar Camiseta EBAC.'
+            }
+        );
+
+        // Seleciona o produto validado pelos dados fixos da tela de detalhes.
+        await CatalogoPage.selecionarProdutoPorNome('Camiseta EBAC');
 
         await expect(DetalhesProdutoPage.nomeProduto).toBeDisplayed();
         await expect(DetalhesProdutoPage.precoProduto).toBeDisplayed();

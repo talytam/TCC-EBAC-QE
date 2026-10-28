@@ -76,7 +76,16 @@ test.describe('US-0004 - Catálogo de produtos', () => {
     const catalogo = new CatalogoPage(page);
 
     await catalogo.acessarLoja();
-    await catalogo.pesquisarPorCategoria('Shorts');
+    await catalogo.abrirPesquisa();
+    await catalogo.seletorCategoria.selectOption({ label: 'Shorts' });
+
+    // Valida a categoria no formulário e o parâmetro aplicado à busca.
+    await expect(
+      catalogo.seletorCategoria.locator('option:checked')
+    ).toHaveText('Shorts');
+
+    await catalogo.botaoPesquisa.click();
+    await expect(page).toHaveURL(/product_cat=shorts/i);
 
     await expect(
       page.getByText('Torque Power Short', { exact: true })

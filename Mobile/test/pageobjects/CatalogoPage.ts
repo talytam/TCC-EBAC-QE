@@ -39,6 +39,20 @@ class CatalogoPage {
         await this.campoPesquisa.setValue(nome);
     }
 
+    async selecionarProdutoPorNome(nome: string) {
+        const produtos = await this.produtos;
+
+        for (const produto of produtos) {
+            const descricao = await produto.getAttribute('content-desc');
+            if (descricao?.includes(nome)) {
+                await produto.click();
+                return;
+            }
+        }
+
+        throw new Error(`Produto "${nome}" não encontrado nos resultados do catálogo.`);
+    }
+
     async quantidadeProdutos() {
         return (await this.produtos).length;
     }
