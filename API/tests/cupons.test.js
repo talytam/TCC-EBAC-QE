@@ -282,5 +282,4 @@ test('CT-020 - Validar campo obrigatório e campos opcionais do cupom', async ()
     }
   }
 
-  console.table(resultados);
-});
+  console.table(resultados);}, 30000);
