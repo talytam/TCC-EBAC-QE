@@ -20,7 +20,7 @@ Automação de testes funcionais do aplicativo Android **EBAC Store**, como part
 | CT-024 | Retornar lista vazia e mensagem para produto inexistente | Aprovado |
 | CT-025 | Filtrar produtos por categoria | **Bloqueado** (`it.skip`) |
 
-**Última execução registrada:** 19/10/2026 — **4 passing, 1 skipped, 0 failing**; última execução com Allure em aproximadamente **2min57s**. O status `skipped` do WebdriverIO corresponde a um cenário **bloqueado**, não aprovado, na documentação de QA.
+**Execução histórica da suíte completa:** 19/10/2026 — **4 passing, 1 skipped, 0 failing**; execução com Allure em aproximadamente **2min57s**. **Reteste posterior do CT-022:** aprovado em 27/10/2026 (horário de Brasília), detalhado a seguir. O status `skipped` do WebdriverIO corresponde a um cenário **bloqueado**, não aprovado, na documentação de QA.
 
 ## Melhoria pós-avaliação (27/10/2026)
 
@@ -28,7 +28,17 @@ O **CT-022** foi atualizado para **pesquisar `Camiseta EBAC` e selecionar explic
 
 A mudança elimina a dependência da ordem dos produtos: a tela de detalhes continua validando os valores conhecidos da Camiseta EBAC, mas agora o teste garante que esse foi o produto aberto.
 
-As evidências e contagens de **19/10/2026** continuam preservadas como histórico da suíte anterior à melhoria. A validação da alteração requer nova execução no Android com Appium e emulador.
+As evidências e contagens de **19/10/2026** continuam preservadas como histórico da suíte anterior à melhoria.
+
+### Reteste do CT-022 — 27/10/2026 (horário de Brasília)
+
+O CT-022 corrigido foi reexecutado no emulador Android com Appium e WebdriverIO, selecionando apenas esse cenário via `--mochaOpts.grep="CT-022"`.
+
+**Resultado: PASS — 1 passing (29,3 s); 1 spec aprovada, 0 falhas.** O processamento completo informado pelo runner foi de aproximadamente **55 segundos**. Foi confirmada a aprovação do cenário que agora seleciona a Camiseta EBAC explicitamente.
+
+[**Registro e transcrição da evidência do reteste CT-022**](evidencias/CT-022-reteste-2026-10-28.md).
+
+**Importante:** somente o CT-022 foi reexecutado nessa ocasião. Os demais casos mantêm os resultados documentados em 19/10/2026, incluindo o **CT-025 bloqueado**.
 
 **Executar apenas CT-022:**
 
@@ -101,7 +111,7 @@ npx allure open allure-report
 
 Os diretórios `allure-results/` e `allure-report/` são gerados localmente e estão no `.gitignore`. O projeto versiona a configuração e as capturas do resultado, não os artefatos temporários.
 
-**Evidências publicadas:** [Execução WebdriverIO](evidencias/execucao-catalogo-android.png) · [Painel Allure](evidencias/relatorio-allure-android.png)
+**Evidências publicadas:** [Execução histórica WebdriverIO](evidencias/execucao-catalogo-android.png) · [Painel Allure histórico](evidencias/relatorio-allure-android.png) · [Registro do reteste aprovado do CT-022](evidencias/CT-022-reteste-2026-10-28.md)
 
 ## Evidências e limitações
 
