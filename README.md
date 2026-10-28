@@ -11,12 +11,12 @@ O objetivo é aplicar práticas de qualidade de software à **EBAC Shop / EBAC S
 | Frente | Tecnologias | Resultado registrado | Documentação |
 | :--- | :--- | :--- | :--- |
 | **Web** | Playwright · TypeScript · POM | **5 aprovados / 5** | [UI/README.md](UI/README.md) |
-| **API** | Supertest · Jest · JavaScript | **5 aprovados / 6**; CT-020 reprovado por divergência de critério | [API/README.md](API/README.md) |
+| **API** | Supertest · Jest · JavaScript | Histórico: **5/6 aprovados**; reteste isolado **CT-020 aprovado em 28/10** | [API/README.md](API/README.md) |
 | **Mobile (Android)** | WebdriverIO · Appium · TypeScript · Allure | **4 aprovados / 5** — 1 bloqueado | [Mobile/README.md](Mobile/README.md) |
 | **Performance** | Grafana k6 · JavaScript | **2 cenários aprovados** | [Performance/README.md](Performance/README.md) |
 | **Integração contínua** | GitHub Actions · Playwright | **5 testes Web aprovados**, inclusive na reexecução pós-avaliação | [Documentação do CI](Documentacao/ci-github-actions.md) |
 
-> **Importante:** “reprovado” e “bloqueado” são resultados distintos. O teste de API reprovado foi preservado como resultado da suíte, e sua expectativa foi analisada frente à descrição do requisito; o cenário bloqueado de Mobile não foi considerado aprovado. Os números representam as execuções documentadas, não a execução simultânea de todas as frentes.
+> **Importante:** “reprovado” e “bloqueado” são resultados distintos. A falha histórica do CT-020 foi preservada; sua implementação foi corrigida e o cenário passou em reteste isolado em 28/10/2026. Os cinco outros testes de API não foram reexecutados nesse reteste. O cenário Mobile bloqueado não foi considerado aprovado. Os números identificam execuções específicas, não uma execução simultânea de todas as frentes.
 
 ## Organização do repositório
 
@@ -81,9 +81,9 @@ Automação da **US-0004 — Catálogo de Produtos**, cobrindo listagem, detalhe
 Automação da **US-0003 — API de Cupons**, incluindo consulta, validação de contrato, cadastro, duplicidade e análise de campos opcionais/obrigatórios.
 
 - **Resultado histórico (19/10/2026):** 5 testes aprovados e 1 reprovado.
-- **Melhoria pós-avaliação:** CT-020 foi corrigido para diferenciar o campo obrigatório dos opcionais; nova execução local deve ser registrada separadamente.
+- **Melhoria pós-avaliação:** CT-020 foi corrigido para diferenciar o campo obrigatório dos opcionais; **reteste isolado em 28/10/2026: aprovado** (1 passed, 5 skipped por filtragem).
 - **CT-020:** o teste exigia rejeição de campos cuja descrição funcional os tratava como opcionais; a reprovação indica divergência de expectativa, não defeito confirmado da API.
-- **Evidência:** [relatório Jest](API/evidencias/relatorio-jest-api.png).
+- **Evidências:** [relatório histórico Jest](API/evidencias/relatorio-jest-api.png) e [registro do reteste aprovado](API/evidencias/CT-020-reexecucao-2026-10-28.md).
 
 A reprovação foi mantida com interpretação técnica, preservando a rastreabilidade da execução e evitando um falso positivo de defeito.
 
@@ -143,7 +143,7 @@ Credenciais e variáveis sensíveis devem ser configuradas localmente, conforme 
 
 ## Delimitações e critérios de interpretação
 
-Os resultados refletem os ambientes e as datas das execuções registradas. A loja pública e os dados de teste podem mudar; os testes Mobile dependem de emulador e Appium; a suíte de API apresenta uma divergência de critério documentada; e a performance foi avaliada apenas com a carga e a duração definidas para o exercício.
+Os resultados refletem os ambientes e as datas das execuções registradas. A loja pública e os dados de teste podem mudar; os testes Mobile dependem de emulador e Appium; a suíte de API tem um histórico de divergência de critério corrigida, com reteste isolado aprovado; e a performance foi avaliada apenas com a carga e a duração definidas para o exercício.
 
 As três histórias fornecidas foram detalhadas com critérios Gherkin, cinco histórias adicionais foram elaboradas e **45 casos** foram modelados no documento acadêmico, que reúne resultados, premissas, evidências e interpretação dos achados. O conjunto de testes executados corresponde aos cenários e ambientes apresentados acima; os demais casos foram documentados com sua situação própria, sem atribuição de aprovação indevida.
 
